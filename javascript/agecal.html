@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <center>
+        <fieldset>
+            <legend>Arithmetic operations</legend>
+            First Number: <input type="text" name="fval" id="fv"><br><br>
+            Second Number: <input type="text" name="sval" id="sv"><br><br>
+            <input type="radio" name="opt" value="1">ADD
+            <input type="radio" name="opt" value="2">SUBTRACT
+            <input type="radio" name="opt" value="3">MULTIPLY
+            <input type="radio" name="opt" value="4">DIVIDE<br><br>
+            <button type="button" onclick="compute()">Submit</button>
+            <p id="banner"></p>
+        </fieldset>
+        <br><br>
+        <fieldset>
+            <legend>Multiplication Table</legend>
+            Enter a Number: <input type="text" name="num" id="num"><br><br>
+            <button type="button" onclick="create()">Create</button>
+            <p id="out"></p>
+        </fieldset>
+        <br><br>
+        <fieldset>
+            <legend>Age validation</legend>
+            Name: <input type="text" id="nm" onfocusout="validName()"><br><br>
+            Date of Birth: <input type="text" id="dob" onfocusout="validDate()" disabled><br><br>
+            <button type="button" id="btn" onclick="calculateAge()" disabled>Calculate Age</button>
+            <p id="ca"></p>
+        </fieldset>
+    </center>
+
+    <script>
+        function validDate() {
+            let str = document.getElementById("dob").value;
+            let re = /^(?:(?:(?:0?[13578]|1[02])(\/|-|\.)31)\1|(?:(?:0?[1,3-9]|1[0-2])(\/|-|\.)(?:29|30)\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:0?2(\/|-|\.)29\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\/|-|\.)(?:0?[1-9]|1\d|2[0-8])\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+            if (str.match(re)) {
+                document.getElementById("btn").disabled = false;
+            }
+            else {
+                alert("Give a valid date");
+            }
+
+        }
+        function validName() {
+            let str = document.getElementById("nm").value;
+            let valid = /^[A-Za-z\s]+$/;
+            if (str.match(valid)) {
+                //console.log("if");
+                document.getElementById("dob").disabled = false;
+            }
+            else {
+                //console.log("else");
+                alert("Give a valid name");
+            }
+        }
+        function calculateAge() {
+            var s = document.getElementById("dob").value;
+            var date1 = new Date(s);
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+            var date2 = new Date(today);
+            let str = document.getElementById("nm").value;
+            let l=str.split(" ");
+            // To calculate the time difference of two dates 
+            var Difference_In_Time = date2.getTime() - date1.getTime();
+
+            // To calculate the no. of days between two dates 
+            var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+            var output=l[0]+"'s age is: "+parseInt(Difference_In_Days/365)+" Years "+(Difference_In_Days%365)+" Days";
+            document.getElementById("ca").innerHTML = output;
+        }
+        function create() {
+            var n = document.getElementById("num").value;
+            n1 = parseInt(n);
+            let output = '';
+            for (var i = 1; i <= 10; i++) {
+                output = output + n + " * " + i + " = " + (n1 * i).toString() + "<br>";
+            }
+            document.getElementById("out").innerHTML = output;
+        }
+        function compute() {
+            var ele = document.getElementsByName("opt");
+            var f = 0;
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].checked) { f = ele[i].value; break; }
+            }
+            f = parseInt(f);
+            switch (f) {
+                case 1:
+                    add();
+                    break;
+                case 2:
+                    sub();
+                    break;
+                case 3:
+                    mul();
+                    break;
+                case 4:
+                    div();
+                    break;
+            }
+        }
+
+        function add() {
+            var fv = parseInt(document.getElementById('fv').value);
+            var sv = parseInt(document.getElementById('sv').value);
+            var res = fv + sv;
+            var output = "Result = " + res;
+            did = document.getElementById('banner');
+            did.style = "color:black;";
+            did.innerText = output;
+        }
+        function sub() {
+            var fv = parseInt(document.getElementById('fv').value);
+            var sv = parseInt(document.getElementById('sv').value);
+            var res = fv - sv;
+            var output = "Result = " + res;
+            did = document.getElementById('banner');
+            did.style = "color:black;";
+            did.innerText = output;
+        }
+        function mul() {
+            var fv = parseInt(document.getElementById('fv').value);
+            var sv = parseInt(document.getElementById('sv').value);
+            var res = fv * sv;
+            var output = "Result = " + res;
+            did = document.getElementById('banner');
+            did.style = "color:black;";
+            did.innerText = output;
+        }
+        function div() {
+            var fv = parseInt(document.getElementById('fv').value);
+            var sv = parseInt(document.getElementById('sv').value);
+            output = "Zero value is not accepted. Enter different value."
+            did = document.getElementById("banner");
+            if (sv == 0)
+                did.style = "color:red;";
+            else {
+                var res = fv / sv;
+                var output = "Result = " + res;
+            }
+            did.innerText = output;
+        }
+    </script>
+</body>
+
+</html>
