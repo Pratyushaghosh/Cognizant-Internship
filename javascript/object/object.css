@@ -1,0 +1,49 @@
+.back{
+    background-color: white;
+
+}
+#form1{
+ 
+    width: 500px;
+    height: 400px;
+    background-color: white;
+   
+    margin-left:30px ;
+    margin-right: 0px;
+    
+    
+    
+ 
+
+}
+
+.textbox{
+    height: 50px;
+    width: 400px;
+   
+    
+}
+.button{
+    background-color: blue;
+    color: white;
+    border: white;
+    height: 50px;
+    border-radius: 10px;
+}
+.table1{
+    
+    height: 400px;
+    width: 720px;
+    margin-top: 0px;
+   border-width: 1px;
+   border-color: slategray;
+   text-underline-position: below;
+   text-align: center;
+   margin-right: 0px;
+   margin-left: 70px;
+
+}
+.message{
+    height: 40px;
+    width: 100%;
+}
